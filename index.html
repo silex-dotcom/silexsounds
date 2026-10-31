@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SILEX</title>
+<meta name="description" content="SILEX. Producer, entertainer and host of the nightly live music review on TikTok. Live Tuesday to Sunday at 5 PM Mountain.">
+<link rel="canonical" href="https://silexsounds.com/">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SILEX">
+<meta property="og:url" content="https://silexsounds.com/">
+<meta property="og:title" content="SILEX | The nightly live music review">
+<meta property="og:description" content="Producer, entertainer and host of the nightly live music review on TikTok. Live Tuesday to Sunday at 5 PM Mountain.">
+<meta property="og:image" content="https://silexsounds.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SILEX in a black cap, sunglasses and gold chain, next to the SILEX name in gold">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SILEX | The nightly live music review">
+<meta name="twitter:description" content="Producer, entertainer and host of the nightly live music review on TikTok.">
+<meta name="twitter:image" content="https://silexsounds.com/og.jpg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: black stage, one gold voice. Photo-led hero, then the show as a scheduled program, then fans, then business. */
+:root{
+  --black:#000000;
+  --smoke:#161310;
+  --ash:#2a251f;
+  --gold:#C8A24A;
+  --champagne:#EBD9A6;
+  --bone:#F2EBDC;
+  --muted:#A69B86;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(20px,5vw,72px);
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;color-scheme:dark}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--black);color:var(--bone);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--champagne);text-decoration:none}
+a:hover{color:#fff}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;margin:0;color:var(--bone);text-wrap:balance}
+h2{font-size:clamp(2.2rem,4.6vw,3.6rem);letter-spacing:-.01em}
+h3{font-size:1.5rem;font-weight:500}
+p{margin:0 0 1em;max-width:62ch}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.muted{color:var(--muted)}
+
+/* nav */
+.nav{position:sticky;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:0 var(--gutter);height:64px;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ash)}
+.nav .mark{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:.14em;color:var(--gold);flex:none}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;font-size:.9rem;font-weight:600;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.tab{display:block;padding:21px 14px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.nav a.tab:hover{color:var(--bone)}
+.nav a.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.page{display:none}.page.active{display:block}
+@media (max-width:760px){.nav{height:56px}.nav a.tab{padding:17px 11px;font-size:.85rem}}
+
+/* buttons */
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-block;padding:15px 30px;border:1px solid var(--gold);color:var(--black);background:var(--gold);font-weight:700;font-size:.95rem;letter-spacing:.02em;transition:background .18s,color .18s}
+.btn:hover{background:var(--champagne);color:var(--black)}
+.btn.ghost{background:transparent;color:var(--champagne);font-weight:600}
+.btn.ghost:hover{background:rgba(200,162,74,.12);color:#fff}
+.btn.big{padding:20px 40px;font-size:1.1rem}
+
+/* hero */
+.hero{position:relative;min-height:80vh;display:grid;align-items:end;overflow:hidden;background:var(--black)}
+.hero-photo{position:absolute;inset:0;left:34%}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:60% 25%}
+.hero-photo::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--black) 0%,rgba(0,0,0,.7) 26%,rgba(0,0,0,0) 68%),linear-gradient(0deg,var(--black) 0%,rgba(0,0,0,0) 50%);z-index:1}
+.hero-copy{position:relative;z-index:2;padding:80px var(--gutter) clamp(44px,7vh,90px)}
+.live-pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold);color:var(--champagne);padding:8px 16px;font-size:.85rem;font-weight:600;margin-bottom:26px}
+.live-pill i{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(200,162,74,.6);animation:pulse 1.8s infinite}
+.live-pill.on{background:var(--gold);color:var(--black)}
+.live-pill.on i{background:var(--black);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(200,162,74,.6)}100%{box-shadow:0 0 0 12px rgba(200,162,74,0)}}
+.hero-copy .name{font-family:var(--serif);font-weight:600;font-size:clamp(5.4rem,19vw,17rem);line-height:.82;letter-spacing:.02em;color:var(--gold);margin:0 0 .16em -.04em}
+.hero-copy .role{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.5rem,2.6vw,2.2rem);color:var(--bone);margin:0 0 .5em;max-width:none}
+.hero-copy .lede{max-width:46ch;color:var(--muted);font-size:1.05rem;margin-bottom:1.6em}
+@media (max-width:860px){
+  .hero{min-height:auto}
+  .hero-photo{position:relative;left:0;height:96vw;max-height:620px}
+  .hero-photo::before{background:linear-gradient(0deg,var(--black) 0%,rgba(0,0,0,0) 55%)}
+  .hero-copy{margin-top:-18vw;padding-top:0;padding-bottom:52px}
+}
+
+/* schedule strip */
+.sched{border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.sched .wrap{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;padding-top:26px;padding-bottom:26px}
+.sched .next{font-family:var(--serif);font-size:1.25rem;line-height:1.3}
+.sched .next b{display:block;font-size:2.2rem;font-weight:500;color:var(--champagne);font-variant-numeric:tabular-nums;line-height:1.05}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0;padding:0;list-style:none;text-align:center}
+.days li{padding:12px 4px;border:1px solid var(--ash);font-size:.8rem;color:var(--muted)}
+.days li b{display:block;font-family:var(--serif);font-size:1.3rem;color:var(--bone);font-weight:600}
+.days li.on{border-color:var(--gold);color:var(--champagne)}
+.days li.on b{color:var(--gold)}
+.days li.today{background:rgba(200,162,74,.14)}
+@media (max-width:760px){.sched .wrap{grid-template-columns:1fr;gap:20px}.days li{padding:10px 2px}.days li b{font-size:1.1rem}}
+
+/* sections */
+section{padding:clamp(72px,10vw,120px) 0}
+.two{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,6vw,96px);align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr;gap:28px}}
+.two h2{position:sticky;top:40px}
+
+/* latest clips: TikTok's own creator embed, refreshes itself */
+.feed{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
+.feed-head p{margin-top:18px}
+.feed-head .btn{margin-top:10px}
+.feed-frame{position:relative;min-height:420px;border:1px solid var(--gold);background:var(--smoke);padding:clamp(10px,2vw,20px)}
+.feed-frame .tiktok-embed{margin:0 auto;border:0}
+.feed-frame .tiktok-embed section{display:none}
+.feed-frame iframe{display:block;margin:0 auto}
+.feed-fallback{position:absolute;inset:clamp(10px,2vw,20px);display:flex;flex-direction:column;justify-content:flex-end;gap:16px;padding:clamp(22px,4vw,40px);background:linear-gradient(0deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.35) 100%),url("silex.jpg") center 22%/cover no-repeat}
+.feed-fallback h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--bone);max-width:16ch}
+.feed-fallback p{color:var(--muted);margin:0}
+.feed-fallback .btn{align-self:flex-start}
+.feed-frame.loaded .feed-fallback{display:none}
+@media (max-width:860px){.feed{grid-template-columns:1fr;gap:28px}.feed-frame{min-height:360px}}
+
+/* testimonials */
+.wall{background:var(--smoke)}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3vw,40px) clamp(20px,3vw,40px);margin-top:40px}
+.quotes figure{display:flex;flex-direction:column}
+.quotes blockquote{flex:1}
+.quotes figure{margin:0;padding:28px 0 0;border-top:1px solid var(--gold)}
+.quotes blockquote{margin:0 0 18px;font-family:var(--serif);font-size:clamp(1.3rem,1.8vw,1.6rem);line-height:1.3;color:var(--bone)}
+.quotes figcaption{color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;gap:12px}
+.quotes figcaption b{color:var(--gold);font-weight:700}
+.wall .stat{font-family:var(--serif);font-size:clamp(1.4rem,2.2vw,1.9rem);color:var(--champagne);margin:34px 0 0;font-style:italic;max-width:none}
+@media (max-width:860px){.quotes{grid-template-columns:1fr}}
+
+/* fan actions */
+.fans .row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.act{border:1px solid var(--ash);padding:30px 26px;display:flex;flex-direction:column;gap:12px}
+.act h3{color:var(--champagne)}
+.act p{color:var(--muted);font-size:.95rem;margin:0 0 6px;flex:1}
+.act .btn{align-self:flex-start}
+@media (max-width:860px){.fans .row{grid-template-columns:1fr}}
+
+/* follow everywhere */
+.follow-lede{margin-top:18px}
+.follow{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;margin-top:30px}
+.follow-main{display:flex;align-items:center;gap:20px;padding:30px;background:var(--gold);color:var(--black);transition:background .18s}
+.follow-main:hover{background:var(--champagne);color:var(--black)}
+.follow-main svg{width:46px;height:46px;flex:none;fill:currentColor}
+.follow-main b{display:block;font-family:var(--serif);font-size:clamp(1.8rem,2.8vw,2.3rem);font-weight:600;line-height:1.05}
+.follow-main small{display:block;margin-top:6px;font-size:.9rem;font-weight:600;color:rgba(0,0,0,.7)}
+.socials{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.socials a{display:flex;align-items:center;gap:12px;height:100%;padding:20px;border:1px solid var(--ash);color:var(--bone);font-weight:600;transition:border-color .18s,background .18s}
+.socials a:hover{border-color:var(--gold);background:rgba(200,162,74,.08);color:#fff}
+.socials svg{width:22px;height:22px;flex:none;fill:var(--gold)}
+.fans .row.pair{grid-template-columns:repeat(2,1fr)}
+.foot-socials{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.foot-socials a{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--ash);transition:border-color .18s,background .18s}
+.foot-socials a:hover{border-color:var(--gold);background:rgba(200,162,74,.1)}
+.foot-socials svg{width:20px;height:20px;fill:var(--gold)}
+footer .wrap{align-items:center}
+@media (min-width:861px){.socials li:last-child:nth-child(3n+1){grid-column:1/-1}}
+@media (max-width:860px){.follow{grid-template-columns:1fr}.socials{grid-template-columns:repeat(2,1fr);gap:10px}.socials a{padding:16px}.socials li:last-child:nth-child(odd){grid-column:1/-1}.fans .row.pair{grid-template-columns:1fr}}
+
+/* music: under construction, caution tape in house colors */
+.soon{position:relative;overflow:hidden;min-height:72vh;display:grid;align-content:center;padding:clamp(110px,14vw,170px) 0}
+.tape{position:absolute;left:-10%;width:120%;height:50px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.65);z-index:1}
+.tape::before,.tape::after{content:"";position:absolute;left:0;right:0;height:8px;background:repeating-linear-gradient(-45deg,var(--black) 0 8px,transparent 8px 16px)}
+.tape::before{top:0}.tape::after{bottom:0}
+.tape span{color:var(--black);font-weight:800;font-size:.82rem;letter-spacing:.3em;white-space:nowrap;text-transform:uppercase}
+.tape.a{top:clamp(34px,6vw,64px);transform:rotate(-3deg)}
+.tape.b{bottom:clamp(34px,6vw,64px);transform:rotate(2deg)}
+.soon-body{position:relative;z-index:2;text-align:left}
+.soon-body .kicker{font-size:.85rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.soon-title{font-family:var(--serif);font-weight:600;font-size:clamp(4.2rem,15vw,12rem);line-height:.86;letter-spacing:-.01em;color:var(--gold);margin:0}
+.build{margin:clamp(28px,4vw,44px) 0 30px;max-width:420px}
+.build .bar{position:relative;height:2px;background:var(--ash);overflow:hidden}
+.build .bar i{position:absolute;top:0;left:0;height:100%;width:34%;background:var(--gold);animation:build 2.4s ease-in-out infinite alternate}
+.build small{display:flex;justify-content:space-between;margin-top:10px;font-size:.8rem;color:var(--muted);letter-spacing:.06em}
+.build small b{color:var(--champagne);font-weight:600}
+@keyframes build{from{left:0}to{left:66%}}
+@media (max-width:760px){.tape{height:42px}.tape::before,.tape::after{height:6px}.tape span{font-size:.7rem;letter-spacing:.24em}}
+
+/* brands */
+.menu{margin:24px 0 0;padding:0;list-style:none}
+.menu li{padding:24px 0;border-top:1px solid var(--ash)}
+.menu li:last-child{border-bottom:1px solid var(--ash)}
+.menu .n{display:block;font-family:var(--serif);font-weight:600;font-size:1.7rem;color:var(--bone);margin-bottom:4px}
+.menu .d{color:var(--muted);max-width:60ch;margin:0}
+.menu-head{margin:38px 0 0;font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.menu-head + .menu{margin-top:14px}
+.partner{margin-top:30px;padding-top:20px;border-top:1px solid var(--gold);color:var(--muted)}
+.partner b,.aside strong{color:var(--bone);font-weight:600}
+
+/* consult */
+.svc{list-style:none;margin:44px 0 0;padding:0}
+.svc li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:20px clamp(32px,5vw,72px);padding:40px 0;border-top:1px solid var(--ash)}
+.svc li:last-child{border-bottom:1px solid var(--ash)}
+.svc h3{font-size:clamp(1.9rem,3vw,2.5rem);font-weight:600;color:var(--bone)}
+.svc .via{display:block;margin-top:10px;color:var(--gold);font-size:.88rem;font-weight:600}
+.svc .body p{color:var(--muted);margin:0 0 16px}
+.svc .topics{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.svc .topics li{display:block;padding:6px 12px;border:1px solid var(--ash);font-size:.85rem;color:var(--champagne)}
+@media (max-width:760px){.svc li{grid-template-columns:1fr}}
+select{width:100%;background:var(--black);border:0;border-bottom:1px solid var(--ash);color:var(--bone);font:inherit;padding:10px 0;border-radius:0}
+select:focus{outline:0;border-bottom-color:var(--gold)}
+
+/* contact */
+.contact h2{font-size:clamp(2.6rem,6vw,5rem)}
+.contact .two{grid-template-columns:1fr 1fr}
+.email-btn{display:inline-block;margin-top:28px;font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.3rem);font-weight:500;color:var(--black);background:var(--gold);padding:18px 28px;line-height:1;word-break:break-all}
+.email-btn:hover{background:var(--champagne);color:var(--black)}
+form{display:grid;gap:18px}
+label{display:grid;gap:8px;font-size:.9rem;color:var(--muted)}
+input,textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--ash);color:var(--bone);font:inherit;padding:10px 0;border-radius:0}
+input:focus,textarea:focus{outline:0;border-bottom-color:var(--gold)}
+textarea{min-height:120px;resize:vertical}
+textarea::placeholder{color:var(--muted);opacity:.7}
+form .btn{justify-self:start;margin-top:6px}
+@media (max-width:860px){.contact .two{grid-template-columns:1fr}}
+
+.contact .cta-row{margin-top:28px}
+.dm-tips{border-top:1px solid var(--gold);padding-top:24px}
+.dm-tips h3{color:var(--champagne);margin-bottom:14px}
+.dm-tips ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.dm-tips li{position:relative;padding-left:22px;color:var(--muted)}
+.dm-tips li::before{content:"";position:absolute;left:0;top:.8em;width:10px;height:1px;background:var(--gold)}
+
+footer{border-top:1px solid var(--ash);padding:34px 0 48px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <a class="mark" href="#top">SILEX</a>
+  <ul role="tablist">
+    <li><a class="tab" href="#home">Home</a></li>
+    <li><a class="tab" href="#live">Live show</a></li>
+    <li><a class="tab" href="#services">Services</a></li>
+    <li><a class="tab" href="#music">Music</a></li>
+    <li><a class="tab" href="#brands">For brands</a></li>
+    <li><a class="tab" href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page" id="p-home"><header class="hero" id="top">
+  <div class="hero-photo"><img src="silex.jpg" alt="SILEX in a black cap and sunglasses, gold chain, in front of a sunflower mural" fetchpriority="high"></div>
+  <div class="hero-copy">
+    <div class="live-pill" id="pill"><i></i><span id="pill-text">Live tonight, 5 PM Mountain</span></div>
+    <h1 class="name">SILEX</h1>
+    <p class="role">The nightly live music review. Your song, rated on air, in front of the room.</p>
+    <p class="lede">Six nights a week on TikTok LIVE, independent artists put their records in front of SILEX and a live crowd. <span data-stat="reviews">4,030</span> tracks reviewed and a <span data-stat="score">9.9</span> rating from the artists themselves.</p>
+    <div class="cta-row">
+      <a class="btn big" href="https://www.tiktok.com/@therealsilex/live" rel="noopener">Watch live</a>
+      <a class="btn ghost" href="https://www.tiktok.com/@therealsilex" rel="noopener">Follow @therealsilex</a>
+    </div>
+  </div>
+</header>
+
+<div class="sched" id="schedule">
+  <div class="wrap">
+    <div class="next"><span class="muted next-label">Next show in</span><b class="countdown">--</b></div>
+    <ol class="days days-list" aria-label="Weekly live schedule">
+      <li data-d="1"><b>Mon</b>off</li>
+      <li data-d="2" class="on"><b>Tue</b>5 PM</li>
+      <li data-d="3" class="on"><b>Wed</b>5 PM</li>
+      <li data-d="4" class="on"><b>Thu</b>5 PM</li>
+      <li data-d="5" class="on"><b>Fri</b>5 PM</li>
+      <li data-d="6" class="on"><b>Sat</b>5 PM</li>
+      <li data-d="0" class="on"><b>Sun</b>5 PM</li>
+    </ol>
+  </div>
+</div>
+
+<section id="clips">
+  <div class="wrap feed">
+    <div class="feed-head">
+      <h2>Latest from the show</h2>
+      <p class="muted">The newest clips from the live, straight from TikTok. This updates on its own every time a new one drops.</p>
+      <a class="btn ghost" href="https://www.tiktok.com/@therealsilex" rel="noopener">See every clip on TikTok</a>
+    </div>
+    <div class="feed-frame" id="feed">
+      <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@therealsilex" data-unique-id="therealsilex" data-embed-type="creator" style="max-width:720px;min-width:288px;">
+        <section><a target="_blank" rel="noopener" href="https://www.tiktok.com/@therealsilex?refer=creator_embed">@therealsilex</a></section>
+      </blockquote>
+      <div class="feed-fallback">
+        <h3>New clips from the live every week.</h3>
+        <p>Watch the latest on TikTok.</p>
+        <a class="btn" href="https://www.tiktok.com/@therealsilex" rel="noopener">Watch on TikTok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="artists">
+  <div class="wrap">
+    <h2>What artists say after the review</h2>
+    <div class="quotes">
+      <figure>
+        <blockquote>"Silex is the best. He's fair, honest, respectful and kind. Quality constructive criticism without tearing someone down. Silex is an amazing reviewer."</blockquote>
+        <figcaption><span>Ghøstwriter</span><b>10/10</b></figcaption>
+      </figure>
+      <figure>
+        <blockquote>"Silex provides a thorough song analysis within a vibrant and welcoming community-driven stream. Criticisms are always constructive, and your song more often than not comes out better than when you submitted."</blockquote>
+        <figcaption><span>Artist on Standard</span><b>10/10</b></figcaption>
+      </figure>
+      <figure>
+        <blockquote>"Silex reviews are honest and his delivery is swift and professional, giving great feedback and taking his time. You can tell he is genuinely passionate when it comes to music and production."</blockquote>
+        <figcaption><span>Michael Joshua</span><b>10/10</b></figcaption>
+      </figure>
+      <figure>
+        <blockquote>"I love your reviews, they always come from a very positive place, never talking down to the songwriter. Your livestream and reviews are definitely a cut above."</blockquote>
+        <figcaption><span>Artist on Standard</span><b>10/10</b></figcaption>
+      </figure>
+      <figure>
+        <blockquote>"Always a pleasure going on the Silex show. Just a shame about the time zone difference."</blockquote>
+        <figcaption><span>Velvet Cabal</span><b>10/10</b></figcaption>
+      </figure>
+      <figure>
+        <blockquote>"Silex is the man."</blockquote>
+        <figcaption><span>Gray Eye</span><b>10/10</b></figcaption>
+      </figure>
+    </div>
+    <p class="stat"><span data-stat="reviews">4,030</span> tracks reviewed. Rated <span data-stat="score">9.9</span> out of 10 by the artists. <a href="https://standard.iowire.com/host/silex" rel="noopener">See every rating on Standard.</a></p>
+  </div>
+</section>
+
+<section class="fans" id="fans">
+  <div class="wrap">
+    <h2>Be part of the room</h2>
+    <p class="muted follow-lede">The live show is on TikTok. Clips and news everywhere else.</p>
+    <div class="follow">
+      <a class="follow-main" href="https://www.tiktok.com/@therealsilex" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg><span><b>Follow on TikTok</b><small>@therealsilex. Live Tue to Sun, 5 PM Mountain.</small></span></a>
+      <ul class="socials" aria-label="SILEX on other platforms">
+        <li><a href="https://www.youtube.com/channel/UCS8ROlxicIFNX8FSCn1Xozg" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>YouTube</span></a></li>
+        <li><a href="https://kick.com/therealsilex" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z"/></svg><span>Kick</span></a></li>
+        <li><a href="https://www.instagram.com/therealsilex/" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg><span>Instagram</span></a></li>
+        <li><a href="https://x.com/therealsilex" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><span>X</span></a></li>
+        <li><a href="https://www.facebook.com/1403559609511039" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg><span>Facebook</span></a></li>
+        <li><a href="https://www.threads.com/@therealsilex" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg><span>Threads</span></a></li>
+        <li><a href="https://discord.gg/XwbBqce9Qb" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg><span>Discord</span></a></li>
+      </ul>
+    </div>
+    <div class="row pair">
+      <div class="act">
+        <h3>Submit your song</h3>
+        <p>Put your track in the queue for the nightly review, or get a full offline review of a single song.</p>
+        <a class="btn ghost" href="https://standard.iowire.com/host/silex" rel="noopener">Submit through Standard</a>
+      </div>
+      <div class="act">
+        <h3>Join the Discord</h3>
+        <p>First word on new music, show changes and events, and a place to hang out between shows.</p>
+        <a class="btn ghost" href="https://discord.gg/XwbBqce9Qb" rel="noopener">Join the Discord</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page" id="p-live"><div class="sched">
+  <div class="wrap">
+    <div class="next"><span class="muted next-label">Next show in</span><b class="countdown">--</b></div>
+    <ol class="days days-list" aria-label="Weekly live schedule">
+      <li data-d="1"><b>Mon</b>off</li>
+      <li data-d="2" class="on"><b>Tue</b>5 PM</li>
+      <li data-d="3" class="on"><b>Wed</b>5 PM</li>
+      <li data-d="4" class="on"><b>Thu</b>5 PM</li>
+      <li data-d="5" class="on"><b>Fri</b>5 PM</li>
+      <li data-d="6" class="on"><b>Sat</b>5 PM</li>
+      <li data-d="0" class="on"><b>Sun</b>5 PM</li>
+    </ol>
+  </div>
+</div>
+<div class="wrap" style="padding-top:40px"><div class="cta-row"><a class="btn big" href="https://www.tiktok.com/@therealsilex/live" rel="noopener">Watch live</a><a class="btn ghost" href="https://standard.iowire.com/host/silex" rel="noopener">Submit your song</a></div></div>
+
+<section id="show" style="background:var(--black)">
+  <div class="wrap two">
+    <h2>The show</h2>
+    <div>
+      <p>SILEX runs a live music review on TikTok, Tuesday through Sunday at 5 PM Mountain. Independent and unsigned artists submit a track, it plays in full to the room, and SILEX scores it on air with notes on the mix, the hook and the performance. Artists rate the host back after every review.</p>
+      <p>The show runs on Standard, a review platform whose host roster includes Adele's longtime drummer, Sean Paul's keyboardist and diamond-certified industry veterans. SILEX has been the top-ranked host on the platform since it launched.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page" id="p-services"><section id="services-sec">
+  <div class="wrap">
+    <h2>Work with SILEX</h2>
+    <p class="muted" style="margin-top:18px">For artists who want more than a rating on the live show.</p>
+    <ul class="svc">
+      <li>
+        <div><h3>Beats and production</h3><span class="via">Start with a quick message</span></div>
+        <div class="body">
+          <p>Custom beats, full production and remixes for your next release. Describe the sound you're after and what the project is, and SILEX will reach out to talk it through.</p>
+          <ul class="topics"><li>Custom beats</li><li>Full production</li><li>Remixes</li></ul>
+          <a class="btn" href="#contact" data-topic="Beats and production">Tell SILEX about your project</a>
+        </div>
+      </li>
+      <li>
+        <div><h3>Mixing and mastering</h3><span class="via">Start with a quick message</span></div>
+        <div class="body">
+          <p>A record that hits on every system, loud and clean enough for streaming and radio. Tell SILEX what you're working on and where you want it to land, and you'll get a call or message back to talk it through.</p>
+          <ul class="topics"><li>Mixing</li><li>Mastering</li><li>Mix and master</li></ul>
+          <a class="btn" href="#contact" data-topic="Mixing and mastering">Tell SILEX about your project</a>
+        </div>
+      </li>
+      <li>
+        <div><h3>Consults</h3><span class="via">Booked through Standard</span></div>
+        <div class="body">
+          <p>One-on-one time on everything around the music. Building and growing a TikTok LIVE, developing as an artist, planning a release, and how the business side actually works.</p>
+          <ul class="topics"><li>TikTok LIVE strategy</li><li>Artist development</li><li>Release planning</li><li>Music business</li></ul>
+          <a class="btn" href="https://standard.iowire.com/host/silex" rel="noopener">Book a consult</a>
+        </div>
+      </li>
+      <li>
+        <div><h3>Offline reviews</h3><span class="via">Booked through Standard</span></div>
+        <div class="body">
+          <p>A full review of a single song, done off-stream. More time on the mix, the arrangement and the hook than the live format allows, with notes you can take straight back to the session.</p>
+          <a class="btn ghost" href="https://standard.iowire.com/host/silex" rel="noopener">Get an offline review</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+</div>
+<div class="page" id="p-music"><section class="soon" id="music-sec">
+  <div class="tape a" aria-hidden="true"><span>Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction</span></div>
+  <div class="wrap soon-body">
+    <p class="kicker">Music</p>
+    <h2 class="soon-title">Coming Soon</h2>
+    <div class="build" aria-hidden="true">
+      <div class="bar"><i></i></div>
+      <small><span>Building in the studio</span><b>SILEX</b></small>
+    </div>
+    <a class="btn ghost" href="https://www.tiktok.com/@therealsilex" rel="noopener">Follow to hear it first</a>
+  </div>
+  <div class="tape b" aria-hidden="true"><span>Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction &nbsp;&middot;&nbsp; Under construction</span></div>
+</section>
+</div>
+<div class="page" id="p-brands"><section id="brands-sec">
+  <div class="wrap two">
+    <div>
+      <h2>For brands</h2>
+      <p class="aside muted" style="margin-top:22px">An audience of musicians, producers and independent artists who buy audio gear, plugins, distribution and creator tools, and who show up every night, six nights a week. <strong>Music-related brands get priority.</strong></p>
+      <p class="aside muted">Gear seeding, affiliate and creator codes, sponsored segments, sponsored content and long-term ambassadorships are all open.</p>
+      <div class="partner"><b>Current partner:</b> sE Electronics. The DynaCaster is the primary mic on every live.</div>
+    </div>
+    <div>
+      <p class="muted" style="margin:0">Ways to work together, on the live show and across socials. Pricing on request.</p>
+      <h3 class="menu-head">On the live show</h3>
+      <ul class="menu">
+        <li><span class="n">Shoutout</span><p class="d">A 60-second on-air mention and your link in bio for one stream.</p></li>
+        <li><span class="n">Featured segment</span><p class="d">A 5 to 10 minute on-stream demo or review of the product, a pinned comment through the stream, and one dedicated short-form clip posted after.</p></li>
+        <li><span class="n">Sponsored skips</span><p class="d">Your brand covers free skips that SILEX gives to independent artists on air. Every skip is announced in your name, so the artist and the whole room hear who moved them to the front of the line.</p></li>
+        <li><span class="n">Partner week</span><p class="d">The featured segment on four streams, a branded overlay on every live that week, and two short-form clips.</p></li>
+      </ul>
+      <h3 class="menu-head">Across socials</h3>
+      <ul class="menu">
+        <li><span class="n">Sponsored reel</span><p class="d">A dedicated short-form video built around your product, posted to TikTok, Instagram Reels, YouTube Shorts and Facebook.</p></li>
+        <li><span class="n">Stories and posts</span><p class="d">Instagram and Facebook Stories, posts on X and Threads, and an announcement in the SILEX Discord.</p></li>
+      </ul>
+      <div class="cta-row" style="margin-top:30px">
+        <a class="btn" href="#contact">Request pricing and the media kit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page" id="p-contact"><section class="contact" id="contact-sec">
+  <div class="wrap two">
+    <div>
+      <h2>Let's build something loud.</h2>
+      <p class="muted" style="margin-top:20px">Brand partnerships, production, bookings and press. Every message gets a reply from SILEX directly.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://ig.me/m/therealsilex" rel="noopener">Message on Instagram</a>
+        <a class="btn ghost" href="https://m.me/1403559609511039" rel="noopener">Message on Facebook</a>
+      </div>
+    </div>
+    <div class="dm-tips">
+      <h3>What to include</h3>
+      <ul>
+        <li>Your brand, label or project</li>
+        <li>What you have in mind, like a sponsorship, beats, a mix or a booking</li>
+        <li>Any dates or deadlines</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+<footer>
+  <div class="wrap">
+    <span>SILEX. Based in Idaho, live everywhere.</span>
+    <ul class="foot-socials" aria-label="Follow SILEX">
+      <li><a href="https://www.tiktok.com/@therealsilex" rel="noopener" aria-label="SILEX on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a></li>
+      <li><a href="https://www.youtube.com/channel/UCS8ROlxicIFNX8FSCn1Xozg" rel="noopener" aria-label="SILEX on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></li>
+      <li><a href="https://kick.com/therealsilex" rel="noopener" aria-label="SILEX on Kick"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/therealsilex/" rel="noopener" aria-label="SILEX on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a></li>
+      <li><a href="https://x.com/therealsilex" rel="noopener" aria-label="SILEX on X"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a></li>
+      <li><a href="https://www.facebook.com/1403559609511039" rel="noopener" aria-label="SILEX on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a></li>
+      <li><a href="https://www.threads.com/@therealsilex" rel="noopener" aria-label="SILEX on Threads"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg></a></li>
+      <li><a href="https://discord.gg/XwbBqce9Qb" rel="noopener" aria-label="SILEX on Discord"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+// Tabs: each page lives on its own hash so links can be shared.
+(function(){
+  var names=['home','live','services','music','brands','contact'];
+  function show(){
+    var h=(location.hash||'#home').slice(1); if(names.indexOf(h)<0) h='home';
+    document.querySelectorAll('.page').forEach(function(p){p.classList.toggle('active',p.id==='p-'+h)});
+    document.querySelectorAll('.nav a.tab').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+h)});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show); show();
+})();
+// Schedule: live Tue to Sun, 5 PM to about 10 PM Mountain time.
+(function(){
+  var TZ='America/Denver', LIVE_DAYS=[0,2,3,4,5,6], START=17, END=22;
+  function now(){
+    var p=new Intl.DateTimeFormat('en-US',{timeZone:TZ,weekday:'short',hour:'numeric',minute:'numeric',second:'numeric',hour12:false}).formatToParts(new Date());
+    var o={}; p.forEach(function(x){o[x.type]=x.value});
+    var d=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(o.weekday);
+    return {d:d, s:(parseInt(o.hour,10)%24)*3600+parseInt(o.minute,10)*60+parseInt(o.second,10)};
+  }
+  var pill=document.getElementById('pill'), pt=document.getElementById('pill-text'), cds=document.querySelectorAll('.countdown'), nls=document.querySelectorAll('.next-label');
+  function setAll(list,txt){list.forEach(function(e){e.textContent=txt})}
+  document.querySelectorAll('.days-list li').forEach(function(li){ if(+li.dataset.d===now().d) li.classList.add('today'); });
+  function tick(){
+    var t=now(), live=LIVE_DAYS.indexOf(t.d)>-1 && t.s>=START*3600 && t.s<END*3600;
+    if(live){ pill.classList.add('on'); pt.textContent='Live right now'; setAll(nls,'On air'); setAll(cds,'Live now'); return; }
+    var secs=null;
+    for(var k=0;k<8;k++){ var day=(t.d+k)%7; if(LIVE_DAYS.indexOf(day)>-1){ var s=k*86400+START*3600-t.s; if(s>0){secs=s;break;} } }
+    var h=Math.floor(secs/3600), m=Math.floor(secs%3600/60), sec=secs%60;
+    setAll(cds,(h>=24?Math.floor(h/24)+'d ':'')+(h%24)+'h '+(m<10?'0':'')+m+'m '+(sec<10?'0':'')+sec+'s');
+    pill.classList.remove('on'); setAll(nls,'Next show in');
+    pt.textContent= LIVE_DAYS.indexOf(t.d)>-1 && t.s<START*3600 ? 'Live tonight, 5 PM Mountain' : 'Live Tue to Sun, 5 PM Mountain';
+  }
+  tick(); setInterval(tick,1000);
+})();
+// Latest clips: the fallback card shows until TikTok's embed draws its feed.
+(function(){
+  var frame=document.getElementById('feed'), tries=0;
+  var t=setInterval(function(){
+    if(frame.querySelector('iframe')){ frame.classList.add('loaded'); clearInterval(t); }
+    else if(++tries>75){ clearInterval(t); }
+  },400);
+})();
+// Standard numbers: stats.json is refreshed every few hours by a GitHub Action; the page keeps its built-in numbers if it can't load.
+fetch('stats.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(s){
+  if(!s) return;
+  if(s.reviews) document.querySelectorAll('[data-stat="reviews"]').forEach(function(e){e.textContent=Number(s.reviews).toLocaleString('en-US')});
+  if(s.score) document.querySelectorAll('[data-stat="score"]').forEach(function(e){e.textContent=s.score});
+}).catch(function(){});
+</script>
+<script async src="https://www.tiktok.com/embed.js"></script>
+</body>
+</html>
