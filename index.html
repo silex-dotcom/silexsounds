@@ -229,6 +229,7 @@ form .btn{justify-self:start;margin-top:6px}
 @media (max-width:860px){.contact .two{grid-template-columns:1fr}}
 
 .contact .cta-row{margin-top:28px}
+.dm-line{margin-top:20px}
 .dm-tips{border-top:1px solid var(--gold);padding-top:24px}
 .dm-tips h3{color:var(--champagne);margin-bottom:14px}
 .dm-tips ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
@@ -483,19 +484,24 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 
     <div>
       <h2>Let's build something loud.</h2>
       <p class="muted" style="margin-top:20px">Brand partnerships, production, bookings and press. Every message gets a reply from SILEX directly.</p>
-      <div class="cta-row">
-        <a class="btn" href="https://ig.me/m/therealsilex" rel="noopener">Message on Instagram</a>
-        <a class="btn ghost" href="https://m.me/1403559609511039" rel="noopener">Message on Facebook</a>
-      </div>
+      <a class="email-btn" data-user="biz" data-domain="silexsounds.com" href="#contact">biz [at] silexsounds.com</a>
+      <p class="muted dm-line">Or send a DM on <a href="https://ig.me/m/therealsilex" rel="noopener">Instagram</a> or <a href="https://m.me/1403559609511039" rel="noopener">Facebook</a>.</p>
     </div>
-    <div class="dm-tips">
-      <h3>What to include</h3>
-      <ul>
-        <li>Your brand, label or project</li>
-        <li>What you have in mind, like a sponsorship, beats, a mix or a booking</li>
-        <li>Any dates or deadlines</li>
-      </ul>
-    </div>
+    <form id="f" action="#">
+      <label>Your name<input id="fn" name="name" required autocomplete="name"></label>
+      <label>Company or project<input id="fc" name="company" autocomplete="organization"></label>
+      <label>What's this about?<select id="ft" name="topic">
+        <option>Brand partnership</option>
+        <option>Beats and production</option>
+        <option>Mixing and mastering</option>
+        <option>Booking</option>
+        <option>Press</option>
+        <option>Something else</option>
+      </select></label>
+      <label>Email<input id="fe" name="email" type="email" required autocomplete="email"></label>
+      <label>What are you looking for?<textarea id="fm" name="message" required placeholder="A few lines is plenty. What you're working on, the sound you want, and any timing."></textarea></label>
+      <button class="btn" type="submit">Send message</button>
+    </form>
   </div>
 </section>
 
@@ -566,6 +572,19 @@ fetch('stats.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():nul
   if(s.reviews) document.querySelectorAll('[data-stat="reviews"]').forEach(function(e){e.textContent=Number(s.reviews).toLocaleString('en-US')});
   if(s.score) document.querySelectorAll('[data-stat="score"]').forEach(function(e){e.textContent=s.score});
 }).catch(function(){});
+// Contact: the address is put together here, so bots reading the page source don't find it.
+(function(){
+  var addr='biz'+'@'+'silexsounds.com';
+  document.querySelectorAll('[data-user]').forEach(function(a){var e=a.dataset.user+'@'+a.dataset.domain; a.href='mailto:'+e; a.textContent=e;});
+  var ft=document.getElementById('ft');
+  document.querySelectorAll('[data-topic]').forEach(function(a){a.addEventListener('click',function(){if(ft) ft.value=a.dataset.topic;});});
+  document.getElementById('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    var g=function(id){return document.getElementById(id).value};
+    var body='Name: '+g('fn')+'\nCompany: '+g('fc')+'\nTopic: '+g('ft')+'\nEmail: '+g('fe')+'\n\n'+g('fm');
+    location.href='mailto:'+addr+'?subject='+encodeURIComponent(g('ft')+': '+g('fn'))+'&body='+encodeURIComponent(body);
+  });
+})();
 </script>
 <script async src="https://www.tiktok.com/embed.js"></script>
 </body>
