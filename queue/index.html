@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The line | SILEX</title>
+<meta name="description" content="The song request line on SILEX's TikTok LIVE: how many songs are waiting and where yours is.">
+<!-- Viewer names show up here, so this page stays out of search results. -->
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://silexsounds.com/queue/">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SILEX">
+<meta property="og:url" content="https://silexsounds.com/queue/">
+<meta property="og:title" content="The line | SILEX">
+<meta property="og:description" content="How many songs are waiting on the LIVE, and where yours is.">
+<meta property="og:image" content="https://silexsounds.com/og.jpg">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Same stage as the main site: black, one gold voice. The line itself is the page. */
+:root{
+  --black:#000000;
+  --smoke:#161310;
+  --ash:#2a251f;
+  --gold:#C8A24A;
+  --champagne:#EBD9A6;
+  --bone:#F2EBDC;
+  --muted:#A69B86;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{color-scheme:dark}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+body{margin:0;background:var(--black);color:var(--bone);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--champagne);text-decoration:none}
+a:hover{color:#fff}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+h1,h2{font-family:var(--serif);font-weight:600;line-height:1.05;margin:0;color:var(--bone);text-wrap:balance}
+p{margin:0}
+
+.nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:0 var(--gutter);height:64px;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ash)}
+.nav .mark{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:.14em;color:var(--gold)}
+.nav .watch{font-size:.9rem;font-weight:600;color:var(--muted)}
+.nav .watch:hover{color:var(--bone)}
+@media (max-width:760px){.nav{height:56px}}
+
+main{max-width:760px;margin:0 auto;padding:clamp(24px,6vw,52px) var(--gutter) 72px}
+
+/* whether new songs are getting in */
+.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold);color:var(--champagne);padding:7px 15px;font-size:.85rem;font-weight:600;margin-bottom:22px}
+.pill i{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:pulse 1.8s infinite}
+.pill.paused{border-color:var(--ash);color:var(--muted)}
+.pill.paused i{background:var(--muted);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(200,162,74,.6)}100%{box-shadow:0 0 0 12px rgba(200,162,74,0)}}
+
+/* the one big statement: how long the line is, or where you are in it */
+/* lining figures: this face's old-style 1 reads as a capital I */
+.hero .big{display:block;font-family:var(--serif);font-weight:600;color:var(--gold);font-size:clamp(5.6rem,25vw,11rem);line-height:.84;letter-spacing:-.01em;margin-left:-.04em;font-variant-numeric:lining-nums}
+.hero .big.words{font-size:clamp(2.9rem,11vw,5.2rem);line-height:.98;color:var(--bone);margin-left:0}
+.hero .after{display:block;font-style:italic;font-weight:500;font-size:clamp(1.5rem,5vw,2.1rem);line-height:1.15;margin-top:.4em}
+.hero .after:empty{display:none}
+.note{color:var(--muted);margin-top:12px;max-width:46ch}
+.note:empty{display:none}
+
+.now{margin-top:34px;padding-top:22px;border-top:1px solid var(--ash)}
+.now .song{font-family:var(--serif);font-size:clamp(1.6rem,5.4vw,2.2rem);line-height:1.1;font-weight:600;overflow-wrap:anywhere}
+.label{font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:6px}
+.muted{color:var(--muted)}
+
+/* find your spot */
+.find{margin-top:34px;padding:22px;background:var(--smoke);border:1px solid var(--ash)}
+.find h2{font-size:1.7rem}
+.find form{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.find input{flex:1 1 180px;min-width:0;background:var(--black);border:1px solid var(--ash);border-radius:0;color:var(--bone);font:inherit;padding:13px 14px}
+.find input::placeholder{color:var(--muted)}
+.find input:focus{border-color:var(--gold);outline:none}
+.btn{display:inline-block;padding:13px 24px;border:1px solid var(--gold);border-radius:0;color:var(--black);background:var(--gold);font:inherit;font-weight:700;font-size:.95rem;letter-spacing:.02em;cursor:pointer}
+.btn:hover{background:var(--champagne);color:var(--black)}
+.find .answer{margin-top:14px;color:var(--champagne)}
+.find .forget{background:none;border:0;padding:0;margin-left:10px;font:inherit;font-size:.9rem;color:var(--muted);text-decoration:underline;cursor:pointer}
+.find .forget:hover{color:var(--bone)}
+
+/* the line */
+.line{margin-top:40px}
+.line h2,.how h2{font-size:clamp(1.9rem,6vw,2.6rem)}
+.group{margin:22px 0 0;font-size:.85rem;font-weight:700;color:var(--gold);padding-bottom:8px;border-bottom:1px solid var(--ash)}
+.group.free{color:var(--muted)}
+ol.rows{list-style:none;margin:0;padding:0}
+ol.rows li{display:grid;grid-template-columns:3.1rem minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--ash)}
+ol.rows .n{font-family:var(--serif);font-size:1.9rem;line-height:1;color:var(--gold);font-weight:600;font-variant-numeric:lining-nums}
+ol.rows li.free .n{color:var(--muted)}
+ol.rows .song{font-weight:600;overflow-wrap:anywhere}
+ol.rows .who{grid-column:2;color:var(--muted);font-size:.92rem;overflow-wrap:anywhere}
+ol.rows li.mine{background:linear-gradient(90deg,rgba(200,162,74,.16),rgba(200,162,74,0) 85%);box-shadow:inset 3px 0 0 var(--gold);padding-left:12px;margin-left:-12px}
+ol.rows li.mine .who{color:var(--champagne)}
+.more{color:var(--muted);padding:14px 0 0}
+
+.how{margin-top:44px;padding-top:26px;border-top:1px solid var(--ash)}
+.how h2{margin-bottom:14px}
+.how p{max-width:52ch;margin-bottom:12px}
+.how .type{display:inline-block;background:var(--gold);color:var(--black);font-weight:700;padding:2px 10px}
+.how .btn{margin-top:10px}
+
+footer{border-top:1px solid var(--ash);padding:26px var(--gutter);color:var(--muted);font-size:.9rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <a class="mark" href="../">SILEX</a>
+  <a class="watch" href="https://www.tiktok.com/@therealsilex/live" rel="noopener">Watch the LIVE</a>
+</nav>
+
+<main>
+  <p class="pill" id="pill" hidden><i></i><span id="pillText"></span></p>
+
+  <div aria-live="polite">
+    <h1 class="hero"><span class="big words" id="big">One moment</span><span class="after" id="after"></span></h1>
+    <p class="note" id="note"></p>
+  </div>
+
+  <section class="now" id="now" hidden>
+    <p class="label">Playing now</p>
+    <p class="song" id="nowSong"></p>
+    <p class="muted" id="nowBy"></p>
+  </section>
+
+  <section class="find" id="find" hidden>
+    <h2>Find your spot</h2>
+    <form id="findForm" autocomplete="off">
+      <input type="text" id="handle" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="40"
+             placeholder="Your TikTok @username" aria-label="Your TikTok username">
+      <button class="btn" type="submit">Find me</button>
+    </form>
+    <p class="answer" id="answer" hidden></p>
+  </section>
+
+  <section class="line" id="line" hidden>
+    <h2>The line</h2>
+    <div id="rows"></div>
+    <p class="more">This page updates by itself.</p>
+  </section>
+
+  <section class="how" id="how" hidden>
+    <h2>Get in line</h2>
+    <p id="howDo"></p>
+    <p class="muted" id="howExample"></p>
+    <p id="howGifts" hidden></p>
+    <a class="btn" href="https://www.tiktok.com/@therealsilex/live" rel="noopener">Watch the LIVE on TikTok</a>
+  </section>
+
+  <section class="how" id="closed" hidden>
+    <h2>Want in next time?</h2>
+    <p>The line opens when SILEX takes song requests live on TikTok. Follow there so you catch it.</p>
+    <a class="btn" href="https://www.tiktok.com/@therealsilex" rel="noopener">Follow SILEX on TikTok</a>
+  </section>
+</main>
+
+<footer>SILEX. Based in Idaho, live everywhere.</footer>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var config = null, snap = null, timer = null, state = "loading", fails = 0;
+
+  // How often to look. Quick while someone is watching the line move, slower once the page
+  // has just been left open, slowest while the line is closed.
+  var LIVE_EVERY = 10000, LEFT_OPEN_EVERY = 30000, IDLE_EVERY = 45000, LEFT_OPEN_AFTER = 15 * 60000;
+  var touched = Date.now();
+  function touch() {
+    var wasLeftOpen = Date.now() - touched > LEFT_OPEN_AFTER;
+    touched = Date.now();
+    if (wasLeftOpen && !document.hidden) cycle();           // they came back: show the line as it is now
+  }
+  ["pointerdown", "keydown", "scroll"].forEach(function (name) {
+    window.addEventListener(name, touch, { passive: true });
+  });
+  function every() {
+    if (state !== "open" && state !== "stale") return IDLE_EVERY;
+    return Date.now() - touched > LEFT_OPEN_AFTER ? LEFT_OPEN_EVERY : LIVE_EVERY;
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function clean(name) { return String(name || "").trim().replace(/^@+/, "").toLowerCase(); }
+  function ordinal(n) {
+    var tens = n % 100, ones = n % 10;
+    if (tens >= 11 && tens <= 13) return n + "th";
+    return n + (ones === 1 ? "st" : ones === 2 ? "nd" : ones === 3 ? "rd" : "th");
+  }
+  function songs(n) { return n === 1 ? "1 song" : n + " songs"; }
+  function who(r) { return r.by ? "@" + r.by : (r.name || "SILEX"); }
+  // Only touch the page when something changed, so nothing flickers or gets read out twice.
+  function text(el, value) { if (el.textContent !== value) el.textContent = value; }
+  function html(el, value) { if (el.__html !== value) { el.__html = value; el.innerHTML = value; } }
+  function show(el, on) { if (el.hidden === on) el.hidden = !on; }
+
+  function saved() { try { return localStorage.getItem("silex-queue-name") || ""; } catch (e) { return ""; } }
+  function save(name) {
+    try { if (name) localStorage.setItem("silex-queue-name", name); else localStorage.removeItem("silex-queue-name"); } catch (e) {}
+  }
+  var me = clean(saved());
+
+  // ---------- reading the line
+  function load() {
+    if (config) return read();
+    return fetch("config.json", { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (c) { config = c || {}; return read(); }, function () {
+      state = "trouble"; render();                        // could not even load the settings: try again later
+    });
+  }
+  function read() {
+    if (!config.url || !config.token) { snap = null; state = "closed"; render(); return Promise.resolve(); }
+    var url = String(config.url).replace(/\/+$/, "") + "/get/" + encodeURIComponent(config.key || "silex-queue") +
+      "?_token=" + encodeURIComponent(config.token);
+    return fetch(url, { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (body) {
+      var raw = body && body.result;
+      var got = raw ? JSON.parse(raw) : null;             // nothing there: the LIVE is over or has not started
+      snap = got && typeof got === "object" && Array.isArray(got.list) ? got : null;
+      fails = 0;
+      state = snap ? "open" : "closed";
+    }).catch(function () {
+      fails += 1;
+      if (snap && fails < 6) state = "stale";             // a blip: keep showing the last good line
+      else { snap = null; state = "trouble"; }
+    }).then(render);
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (document.hidden) return;                          // nobody is looking: stop asking
+    timer = setTimeout(cycle, every());
+  }
+  function cycle() { return load().then(schedule, schedule); }
+  document.addEventListener("visibilitychange", function () {
+    clearTimeout(timer);
+    if (!document.hidden) { touched = Date.now(); cycle(); }
+  });
+
+  // ---------- drawing it
+  // Every place in line this viewer holds. Past the listed songs only names are sent, in order.
+  function spots() {
+    var out = [];
+    if (!me || !snap) return out;
+    snap.list.forEach(function (r) { if (clean(r.by) === me) out.push(r.n); });
+    (snap.more || []).forEach(function (name, i) { if (clean(name) === me) out.push(snap.list.length + i + 1); });
+    return out;
+  }
+  // How many songs sit in gift lines: a place past these is in the free line.
+  function paidCount() {
+    return (snap.lines || []).reduce(function (n, l) { return n + (l.label === "Free" ? 0 : (l.count || 0)); }, 0);
+  }
+  function render() {
+    var open = (state === "open" || state === "stale") && !!snap;
+    ["now", "find", "line", "how"].forEach(function (id) { show($(id), open); });
+    show($("closed"), !open && state !== "loading");
+    show($("pill"), open);
+    var big = $("big"), after = $("after"), note = $("note");
+
+    if (!open) {
+      big.className = "big words";
+      text(big, state === "loading" ? "One moment" : state === "trouble" ? "Can't reach the line" : "The line is closed");
+      text(after, state === "trouble" ? "Trying again in a moment." : "");
+      text(note, "");
+      document.title = "The line | SILEX";
+      return;
+    }
+
+    var taking = snap.intake === "open";
+    $("pill").className = "pill" + (taking && state === "open" ? "" : " paused");
+    text($("pillText"), state === "stale" ? "Reconnecting"
+      : taking ? "The line is open"
+      : snap.intake === "skips" ? "Gift skips only right now" : "No new requests right now");
+
+    var total = snap.count || 0, mine = spots();
+    var playingMine = !!(me && snap.now && clean(snap.now.by) === me);
+    big.className = "big";
+    if (mine.length) {
+      var first = mine[0];
+      text(big, ordinal(first));
+      text(after, first === 1 ? "in line. You're up next." : "in line. " + songs(first - 1) + " play" + (first === 2 ? "s" : "") + " first.");
+      text(note, (mine.length > 1 ? "You have " + mine.length + " songs in line: " + mine.map(ordinal).join(", ") + ". " : "") +
+        songs(total) + " in line right now." +
+        (snap.gift_note && first > paidCount() ? " Your place can move back when a gift skips the line." : ""));
+      document.title = ordinal(first) + " in line | SILEX";
+    } else {
+      text(big, String(total));
+      text(after, total === 1 ? "song in line" : "songs in line");
+      text(note, playingMine ? "Your song is playing right now." : total === 0 ? "Nobody is waiting. A request now plays next." : "");
+      document.title = songs(total) + " in line | SILEX";
+    }
+
+    // playing now
+    show($("now"), !!snap.now);
+    if (snap.now) {
+      text($("nowSong"), snap.now.song);
+      text($("nowBy"), "Requested by " + who(snap.now) +
+        (snap.now.gift ? ", who sent " + snap.now.gift : snap.now.free_skip ? ", on a free skip" : ""));
+    }
+
+    // find your spot
+    show($("answer"), !!me);
+    if (me) {
+      var listed = snap.list.length + (snap.more || []).length;
+      var said = mine.length ? "@" + me + ", you're " + ordinal(mine[0]) + " of " + total + "."
+        : playingMine ? "@" + me + ", your song is on right now."
+        : "Nothing from @" + me + " in the line right now." + (listed < total ? " Only the first " + listed + " places are tracked here." : "");
+      html($("answer"), esc(said) + '<button type="button" class="forget" id="forget">Not you?</button>');
+      if (document.activeElement !== $("handle")) $("handle").value = "@" + me;
+    }
+
+    // the line, grouped the way it plays
+    var out = "", group = null;
+    snap.list.forEach(function (r) {
+      if (r.line !== group) {
+        if (group !== null) out += "</ol>";
+        group = r.line;
+        out += '<p class="group' + (r.paid ? "" : " free") + '">' + esc(r.line) + ' line</p><ol class="rows" role="list" start="' + Number(r.n) + '">';
+      }
+      out += '<li class="' + (r.paid ? "paid" : "free") + (me && clean(r.by) === me ? " mine" : "") + '">' +
+        '<span class="n" aria-hidden="true">' + Number(r.n) + '</span><span class="song">' + esc(r.song) + "</span>" +
+        '<span class="who">' + esc(who(r)) + (r.gift ? " sent " + esc(r.gift) : r.free_skip ? ", free skip" : "") + "</span></li>";
+    });
+    if (group !== null) out += "</ol>";
+    if (snap.list.length < total) out += '<p class="more">and ' + songs(total - snap.list.length) + " more</p>";
+    if (!total) out = '<p class="more">The line is empty.</p>';
+    html($("rows"), out);
+
+    // how to get in
+    var word = snap.trigger || "play", say = '<span class="type">' + esc(word) + " + song + artist</span>";
+    var gifts = (snap.lines || []).filter(function (l) { return l.label !== "Free"; }).map(function (l) { return l.label; });
+    html($("howDo"), snap.intake === "closed" ? "No new requests right now. The songs already in line still play."
+      : snap.intake === "skips" && gifts.length ? "Only gift skips are getting in right now. Send the gift, then comment " + say + " in the LIVE chat."
+      : "Comment " + say + " in the LIVE chat. Name the artist so the right song gets played.");
+    show($("howExample"), snap.intake !== "closed");
+    text($("howExample"), snap.intake === "closed" ? "" : "Like this: " + word + " Thriller Michael Jackson");
+    var showGifts = !!snap.gift_note && gifts.length > 0 && snap.intake === "open";
+    show($("howGifts"), showGifts);
+    text($("howGifts"), showGifts ? "Gifts skip the line. " + gifts[0] + " plays first" +
+      gifts.slice(1).map(function (g) { return ", then " + g; }).join("") + ", then the free line." : "");
+  }
+
+  $("findForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    me = clean($("handle").value);
+    save(me);
+    $("handle").blur();
+    render();
+    var row = document.querySelector("li.mine");
+    if (row && row.scrollIntoView) row.scrollIntoView({ block: "center", behavior: "smooth" });
+  });
+  $("answer").addEventListener("click", function (e) {
+    if (e.target.id !== "forget") return;
+    me = ""; save(""); $("handle").value = ""; render(); $("handle").focus();
+  });
+
+  cycle();
+})();
+</script>
+</body>
+</html>
